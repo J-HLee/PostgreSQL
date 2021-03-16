@@ -15,10 +15,16 @@ public class JavaPostgreSqlRetrieve {
         String url = "jdbc:postgresql://localhost:5432/testdb";
         String user = "postgres";
         String password = "1234";
+        
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        
 
-        try (Connection con = DriverManager.getConnection(url, user, password);
-                PreparedStatement pst = con.prepareStatement("SELECT * FROM authors");
-                ResultSet rs = pst.executeQuery()) {
+        try {
+        	con = DriverManager.getConnection(url, user, password);
+            pstmt = con.prepareStatement("SELECT * FROM authors");
+            rs = pstmt.executeQuery();
 
             while (rs.next()) {
             

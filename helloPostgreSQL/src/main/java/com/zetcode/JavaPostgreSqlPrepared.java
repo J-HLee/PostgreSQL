@@ -18,9 +18,11 @@ public class JavaPostgreSqlPrepared {
         int id = 6;
         String author = "Trygve Gulbranssen";
         String query = "INSERT INTO authors(id, name) VALUES(?, ?)";
+        
+        Connection con = null;
 
-        try (Connection con = DriverManager.getConnection(url, user, password);
-             PreparedStatement pst = con.prepareStatement(query)) {
+        try {con = DriverManager.getConnection(url, user, password);
+             PreparedStatement pst = con.prepareStatement(query);
             
             pst.setInt(1, id);
             pst.setString(2, author);
